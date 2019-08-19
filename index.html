@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+
+    <script src='node_modules/blockly/blockly.js'></script>
+    <script src='node_modules/blockly/blocks.js'></script>
+    <script src='node_modules/blockly/javascript.js'></script>
+    <script src='node_modules/blockly/msg/es.js'></script>
+
+    <script type="module">
+        import pbBlocks from "./pilas-bloques-blocks.js";
+        import toolboxBuilder from "./pbToolboxBuilder.js";
+
+        // Populates Blockly.Block with PilasBloques blocks 
+        pbBlocks.make();
+
+        console.log(toolboxBuilder.toolboxXmlFromBlockTypes(pbBlocks.types()))
+
+        //Injects all PilasBloques blocks in the workspace for this demo.
+        // true is for categorized toolbox
+        Blockly.inject('blocklyDiv', {
+             toolbox: toolboxBuilder.toolboxXmlFromBlockTypes(pbBlocks.types(),true)
+        });
+    </script>
+</body>
+
+</html>
