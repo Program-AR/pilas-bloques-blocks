@@ -25,6 +25,11 @@ function requiredInput(block, inputName) {
 
 let pbBlocks = {
   blockBuilder: blockBuilder,
+  iconsPath: "iconos",
+
+  setIconsPath(path){
+    this.iconsPath = path;
+  },
 
   make() {
     Blockly.textToBlock = this._textToBlock;
@@ -70,6 +75,7 @@ let pbBlocks = {
   crearBloqueAccion(nombre, opciones) {
     this._validar_opciones_obligatorias(nombre, opciones, ['descripcion', 'comportamiento', 'argumentos']);
     opciones.colour = opciones.colour || Blockly.Blocks.primitivas.COLOUR;
+    opciones.icono = opciones.icono ? `${this.iconsPath}/${opciones.icono}` : opciones.icono;
 
     let bloque = this.blockBuilder.createCustomBlockWithHelper(nombre, opciones);
     bloque.categoria = "Primitivas";
@@ -129,7 +135,7 @@ let pbBlocks = {
       args0: [
         {
           type: "field_image",
-          src: `iconos/${opciones.icono}`,
+          src: `${this.iconsPath}/${opciones.icono}`,
           width: 16,
           height: 16,
           alt: "*"
@@ -151,6 +157,7 @@ let pbBlocks = {
   crearBloqueValor(nombre, opciones) {
     this._validar_opciones_obligatorias(nombre, opciones, ['descripcion', 'icono', 'valor']);
     opciones.colour = opciones.colour || Blockly.Blocks.primitivas.COLOUR;
+    opciones.icono = opciones.icono ? `${this.iconsPath}/${opciones.icono}` : opciones.icono;
 
     let bloque = this.blockBuilder.createBlockValue(nombre, opciones);
     bloque.categoria = "Valores";
@@ -736,7 +743,7 @@ let pbBlocks = {
       args0: [
         {
           "type": "field_image",
-          "src": `iconos/icono.arriba.png`,
+          "src": `${this.iconsPath}/icono.arriba.png`,
           "width": 16,
           "height": 20,
           "alt": "*"
@@ -771,7 +778,7 @@ let pbBlocks = {
       args0: [
         {
           "type": "field_image",
-          "src": `iconos/icono.DibujarLinea.png`,
+          "src": `${this.iconsPath}/icono.DibujarLinea.png`,
           "width": 16,
           "height": 16,
           "alt": "*"
@@ -852,7 +859,7 @@ let pbBlocks = {
       args0: [
         {
           "type": "field_image",
-          "src": `iconos/icono.DibujarLinea.png`,
+          "src": `${this.iconsPath}/icono.DibujarLinea.png`,
           "width": 16,
           "height": 16,
           "alt": "*"
@@ -880,7 +887,7 @@ let pbBlocks = {
       args0: [
         {
           "type": "field_image",
-          "src": `iconos/icono.Girar.png`,
+          "src": `${this.iconsPath}/icono.Girar.png`,
           "width": 16,
           "height": 16,
           "alt": "*"
@@ -1166,7 +1173,7 @@ let pbBlocks = {
       "args0": [
         {
           type: "field_image",
-          src: `iconos/icono.DibujarLinea.png`,
+          src: `${this.iconsPath}/icono.DibujarLinea.png`,
           width: 16,
           height: 16,
           alt: "*"

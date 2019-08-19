@@ -4,8 +4,8 @@
   "description": "Block gallery used for Pilas Bloques challenges",
   "main": "pilas-bloques-blocks.js",
   "scripts": {
-    "start": "http-server",
-    "release:patch": "release patch"
+    "updatedemo": "cd docs && npm update --save && git add . && git commit -m \"updated demo\" && git push",
+    "publish:patch": "release patch && npm publish && npm run updatedemo"
   },
   "repository": {
     "type": "git",

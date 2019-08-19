@@ -10,9 +10,10 @@
     <script src='node_modules/blockly/msg/es.js'></script>
 
     <script type="module">
-        import pbBlocks from "./pilas-bloques-blocks.js";
-        import toolboxBuilder from "./pbToolboxBuilder.js";
+        import pbBlocks from "./node_modules/pilas-bloques-blocks/pilas-bloques-blocks.js";
+        import toolboxBuilder from "./node_modules/pilas-bloques-blocks/pbToolboxBuilder.js";
 
+        pbBlocks.setIconsPath("node_modules/pilas-bloques-blocks/iconos");
         // Populates Blockly.Block with PilasBloques blocks 
         pbBlocks.make();
 

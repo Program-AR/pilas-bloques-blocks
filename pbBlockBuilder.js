@@ -77,7 +77,7 @@ const blockBuilder = {
       block_def.message0 = `%1 ${options.descripcion}`;
       block_def.args0.push({
         "type": "field_image",
-        "src": `iconos/${options.icono}`,
+        "src": `${options.icono}`,
         "width": 16,
         "height": 16,
         "alt": "*"
@@ -94,7 +94,7 @@ const blockBuilder = {
       args0: [
         {
           "type": "field_image",
-          "src": `iconos/${options.icono}`,
+          "src": `${options.icono}`,
           "width": 16,
           "height": 16,
           "alt": "*"

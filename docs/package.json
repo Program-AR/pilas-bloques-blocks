@@ -1,0 +1,8 @@
+{
+  "name": "pilas-bloques-blocks-demo",
+  "author": "Program-AR",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "pilas-bloques-blocks": "0.0.2"
+  }
+}
