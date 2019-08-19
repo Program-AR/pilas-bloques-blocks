@@ -1,0 +1,30 @@
+{
+  "name": "pilas-bloques-blocks",
+  "version": "0.0.1",
+  "description": "Block gallery used for Pilas Bloques challenges",
+  "main": "pilas-bloques-blocks.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Program-AR/pilas-bloques-blocks.git"
+  },
+  "keywords": [
+    "Pilas",
+    "bloques",
+    "pilasbloques",
+    "blocks",
+    "blockly",
+    "programming"
+  ],
+  "author": "Program.AR",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Program-AR/pilas-bloques-blocks/issues"
+  },
+  "homepage": "https://github.com/Program-AR/pilas-bloques-blocks#readme",
+  "dependencies": {
+    "blockly": "^2.20190722.1"
+  }
+}
