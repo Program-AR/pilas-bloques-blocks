@@ -1,5 +1,7 @@
+import Blockly from 'blockly'
+
 const blockBuilder = {
-    createCustomBlock(name, options, callback_to_change_block) {
+  createCustomBlock(name, options, callback_to_change_block) {
     options.colour = options.colour || '#4453ff';
 
     if (Blockly.Blocks[name]) {
@@ -55,9 +57,9 @@ const blockBuilder = {
   createBlockWithAsyncDropdown(name, options) {
     function callback_to_change_block() {
       this.
-        appendDummyInput().
-        appendField(options.label || "").
-        appendField(new Blockly.FieldDropdown(options.callbackDropdown), 'DROPDOWN_VALUE');
+      appendDummyInput().
+      appendField(options.label || "").
+      appendField(new Blockly.FieldDropdown(options.callbackDropdown), 'DROPDOWN_VALUE');
     }
 
     return this.createCustomBlock(name, options, callback_to_change_block);
@@ -115,8 +117,8 @@ const blockBuilder = {
 
   getCustomBlocksList() {
     return Object.keys(Blockly.Blocks).filter((e) => {
-      return Blockly.Blocks[e].isCustomBlock;
-    }
+          return Blockly.Blocks[e].isCustomBlock;
+        }
     );
   },
 

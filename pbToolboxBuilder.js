@@ -1,6 +1,8 @@
+import Blockly from 'blockly'
+
 const pbToolboxBuilder = {
   toolboxXmlFromBlockTypes(types, withCategories) {
-    return this.toolboxXmlFromTree(this.toolboxTreeFromBlockTypes(types,withCategories))
+    return this.toolboxXmlFromTree(this.toolboxTreeFromBlockTypes(types, withCategories))
   },
   toolboxXmlFromTree(bloques) {
     let toolbox = [];
@@ -25,11 +27,9 @@ const pbToolboxBuilder = {
               throw new Error(`This block named '${bloque_en_categoria}' don't exist.`);
             }
 
-            if(Blockly.Blocks[bloque_en_categoria].toolbox)
-            {
+            if (Blockly.Blocks[bloque_en_categoria].toolbox) {
               toolbox.push(Blockly.Blocks[bloque_en_categoria].toolbox);
-            }
-            else {
+            } else {
               toolbox.push(`  <block type="${bloque_en_categoria}"></block>`);
             }
           });
@@ -76,7 +76,7 @@ const pbToolboxBuilder = {
    * ]
    *
    */
-  toolboxTreeFromBlockTypes(bloques,conCategorias=true) {
+  toolboxTreeFromBlockTypes(bloques, conCategorias = true) {
 
     if (bloques === undefined) {
       throw new Error("La actividad no tiene bloques definidos, revise el fixture de la actividad para migrarla a ember-blocky.");
@@ -95,18 +95,12 @@ const pbToolboxBuilder = {
 
     });
 
-    toolbox.push({ category: 'Separator', isSeparator: true });
+    toolbox.push({category: 'Separator', isSeparator: true});
 
-    return this._aplicarEstiloAToolbox(this.ordenar_toolbox(toolbox),conCategorias);
+    return this._aplicarEstiloAToolbox(this.ordenar_toolbox(toolbox), conCategorias);
   },
 
-  /**
-   * Dependiendo del desafío, puede pasar que sea necesario no mostrar las categorías
-   * sino directamente los bloques en el toolbox.
-   * 
-   * TODO: Falta implementar el estilo "desplegado"
-   */
-  _aplicarEstiloAToolbox(toolbox,conCategorias) {
+  _aplicarEstiloAToolbox(toolbox, conCategorias) {
     var aplanado = toolbox;
     if (!conCategorias) {
       aplanado = [];
@@ -114,7 +108,7 @@ const pbToolboxBuilder = {
         if (bloque.isSeparator || !bloque.category) {
           aplanado.push(bloque); //un separador ó un id de bloque van directo
         } else {
-          aplanado = aplanado.concat(this._aplicarEstiloAToolbox(bloque.blocks,conCategorias));
+          aplanado = aplanado.concat(this._aplicarEstiloAToolbox(bloque.blocks, conCategorias));
         }
       });
     }
@@ -123,9 +117,9 @@ const pbToolboxBuilder = {
 
   /**
    * Ordena la lista de ítems de un toolbox (usualmente categorias), por el orden
-   * establecido en Pilas Bloques. 
+   * establecido en Pilas Bloques.
    * Las categorías que no están en la lista definida por Pilas Bloques, quedan al final.
-   * @param {*} toolbox 
+   * @param {*} toolbox
    */
   ordenar_toolbox(toolbox) {
     let orden_inicial = [ // Orden inicial para la lista de categorias.
@@ -142,15 +136,11 @@ const pbToolboxBuilder = {
     ];
 
     return toolbox.sort((cat1, cat2) =>
-      orden_inicial.indexOf(cat1.category) >= orden_inicial.indexOf(cat2.category)
+        orden_inicial.indexOf(cat1.category) >= orden_inicial.indexOf(cat2.category)
     );
   },
 
-  /**
-   * Permite obtener el bloque desde blockly a partir de su nombre simple.
-   *
-   * TODO: Mover a ember-blockly. Debería estar dentro del servicio blockly.
-   */
+
   _obtenerBloqueDesdeBlockly(bloqueComoString) {
     return Blockly.Blocks[bloqueComoString];
   },

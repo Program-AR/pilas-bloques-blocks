@@ -1,22 +1,23 @@
 import blockBuilder from "./pbBlockBuilder.js"
+import Blockly from 'blockly'
 
 function shouldAddRequiredShadow(connection) {
   return  connection.getShadowDom() == null // Should have not a shadow block
-  &&      [Blockly.INPUT_VALUE, Blockly.NEXT_STATEMENT].includes(connection.type) // Should be a "block hole"
+      &&      [Blockly.INPUT_VALUE, Blockly.NEXT_STATEMENT].includes(connection.type) // Should be a "block hole"
 }
 
 // Agrega un required shadow a todos los input que sean para encastrar otros bloques
 function requiredAllInputs(block) {
   block.inputList
-  .filter(input => input.connection && shouldAddRequiredShadow(input.connection))
-  .forEach(input => requiredInput(block, input.name))
+      .filter(input => input.connection && shouldAddRequiredShadow(input.connection))
+      .forEach(input => requiredInput(block, input.name))
 }
 
 function requiredInput(block, inputName) {
   let connection = block.getInput(inputName).connection
   let shadowType =  (connection.type == Blockly.INPUT_VALUE)
-                    ? "required_value"
-                    : "required_statement"
+      ? "required_value"
+      : "required_statement"
   var shadowValue = Blockly.Xml.textToDom(`<shadow type="${shadowType}"></shadow>`)
   connection.setShadowDom(shadowValue)
   if (!connection.targetConnection)
@@ -47,7 +48,7 @@ let pbBlocks = {
 
   types(){
     return Object.getOwnPropertyNames(Blockly.Blocks).filter(
-      prop => Blockly.Blocks[prop].categoria
+        prop => Blockly.Blocks[prop].categoria
     );
   },
 
@@ -143,7 +144,6 @@ let pbBlocks = {
       ],
       code: ``
     });
-    // TODO: Arreglar generacion de codigo
     bloque.categoria = "Sensores";
 
     Blockly.MyLanguage[nombre] = function () {
@@ -642,20 +642,20 @@ let pbBlocks = {
     let blockBuilder = this.blockBuilder;
 
     let bloque = blockBuilder.createCustomBlock('MoverA', {
-      message0: "Mover a %1",
-      colour: Blockly.Blocks.primitivas.COLOUR,
-      inputsInline: true,
-      previousStatement: true,
-      nextStatement: true,
-      args0: [
-        {
-          "type": "input_value",
-          "name": "direccion",
-        }
-      ],
-      code: 'hacer(actor_id, "MovimientoEnCuadricula", {direccionCasilla: $direccion});'
-    }, 
-      function() { requiredAllInputs(this) }
+          message0: "Mover a %1",
+          colour: Blockly.Blocks.primitivas.COLOUR,
+          inputsInline: true,
+          previousStatement: true,
+          nextStatement: true,
+          args0: [
+            {
+              "type": "input_value",
+              "name": "direccion",
+            }
+          ],
+          code: 'hacer(actor_id, "MovimientoEnCuadricula", {direccionCasilla: $direccion});'
+        },
+        function() { requiredAllInputs(this) }
     );
 
     bloque.categoria = "Primitivas";
@@ -735,27 +735,27 @@ let pbBlocks = {
     });
 
     blockBuilder.createCustomBlock('SaltarHaciaAdelante', {
-      message0: "%1 Saltar hacia adelante %2",
-      colour: Blockly.Blocks.primitivas.COLOUR,
-      inputsInline: true,
-      previousStatement: true,
-      nextStatement: true,
-      args0: [
-        {
-          "type": "field_image",
-          "src": `${this.iconsPath}/icono.arriba.png`,
-          "width": 16,
-          "height": 20,
-          "alt": "*"
+          message0: "%1 Saltar hacia adelante %2",
+          colour: Blockly.Blocks.primitivas.COLOUR,
+          inputsInline: true,
+          previousStatement: true,
+          nextStatement: true,
+          args0: [
+            {
+              "type": "field_image",
+              "src": `${this.iconsPath}/icono.arriba.png`,
+              "width": 16,
+              "height": 20,
+              "alt": "*"
+            },
+            {
+              "type": "input_value",
+              "name": "longitud",
+            }
+          ],
+          code: 'hacer(actor_id, "SaltarHaciaAdelante", {distancia: $longitud, alturaDeseada: 50, velocidad_inicial: 20, nombreAnimacion: "saltar"});'
         },
-        {
-          "type": "input_value",
-          "name": "longitud",
-        }
-      ],
-      code: 'hacer(actor_id, "SaltarHaciaAdelante", {distancia: $longitud, alturaDeseada: 50, velocidad_inicial: 20, nombreAnimacion: "saltar"});'
-    }, 
-      function() { requiredAllInputs(this) }
+        function() { requiredAllInputs(this) }
     );
 
     Blockly.Blocks.SaltarHaciaAdelante.toolbox = `
@@ -770,27 +770,27 @@ let pbBlocks = {
 
 
     blockBuilder.createCustomBlock('DibujarLado', {
-      message0: "%1 Dibujar lado de %2",
-      colour: Blockly.Blocks.primitivas.COLOUR,
-      inputsInline: true,
-      previousStatement: true,
-      nextStatement: true,
-      args0: [
-        {
-          "type": "field_image",
-          "src": `${this.iconsPath}/icono.DibujarLinea.png`,
-          "width": 16,
-          "height": 16,
-          "alt": "*"
+          message0: "%1 Dibujar lado de %2",
+          colour: Blockly.Blocks.primitivas.COLOUR,
+          inputsInline: true,
+          previousStatement: true,
+          nextStatement: true,
+          args0: [
+            {
+              "type": "field_image",
+              "src": `${this.iconsPath}/icono.DibujarLinea.png`,
+              "width": 16,
+              "height": 16,
+              "alt": "*"
+            },
+            {
+              "type": "input_value",
+              "name": "longitud",
+            }
+          ],
+          code: 'hacer(actor_id, "DibujarHaciaAdelante", {distancia: $longitud, voltearAlIrAIzquierda: false, velocidad: 60});'
         },
-        {
-          "type": "input_value",
-          "name": "longitud",
-        }
-      ],
-      code: 'hacer(actor_id, "DibujarHaciaAdelante", {distancia: $longitud, voltearAlIrAIzquierda: false, velocidad: 60});'
-    }, 
-      function() { requiredAllInputs(this) }
+        function() { requiredAllInputs(this) }
     );
 
     Blockly.Blocks.DibujarLado.toolbox = `
@@ -879,29 +879,29 @@ let pbBlocks = {
     };
 
     blockBuilder.createCustomBlock('GirarGrados', {
-      message0: "%1 Girar %2 grados",
-      colour: Blockly.Blocks.primitivas.COLOUR,
-      inputsInline: true,
-      previousStatement: true,
-      nextStatement: true,
-      args0: [
-        {
-          "type": "field_image",
-          "src": `${this.iconsPath}/icono.Girar.png`,
-          "width": 16,
-          "height": 16,
-          "alt": "*"
+          message0: "%1 Girar %2 grados",
+          colour: Blockly.Blocks.primitivas.COLOUR,
+          inputsInline: true,
+          previousStatement: true,
+          nextStatement: true,
+          args0: [
+            {
+              "type": "field_image",
+              "src": `${this.iconsPath}/icono.Girar.png`,
+              "width": 16,
+              "height": 16,
+              "alt": "*"
+            },
+            {
+              "type": "input_value",
+              "name": "grados",
+            }
+          ],
+          code: 'hacer(actor_id, "Rotar", {angulo: - ($grados), voltearAlIrAIzquierda: false, velocidad: 60});'
         },
-        {
-          "type": "input_value",
-          "name": "grados",
-        }
-      ],
-      code: 'hacer(actor_id, "Rotar", {angulo: - ($grados), voltearAlIrAIzquierda: false, velocidad: 60});'
-    }, 
-      function() { requiredAllInputs(this) }
+        function() { requiredAllInputs(this) }
     );
-    
+
 
     Blockly.Blocks.GirarGrados.toolbox = `
       <block type="GirarGrados">
@@ -1325,12 +1325,12 @@ let pbBlocks = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.appendValueInput('count')
-          .setCheck('Number')
-          .appendField('Repetir');
+            .setCheck('Number')
+            .appendField('Repetir');
         this.appendDummyInput()
-          .appendField('veces');
+            .appendField('veces');
         this.appendStatementInput('block');
-        
+
         requiredAllInputs(this);
         requiredAllInputs(this);
       },
@@ -1354,8 +1354,8 @@ let pbBlocks = {
         this.setColour(Blockly.Blocks.control.COLOUR);
         this.setInputsInline(true);
         this.appendValueInput('condition')
-          .setCheck('Boolean')
-          .appendField('Repetir hasta que');
+            .setCheck('Boolean')
+            .appendField('Repetir hasta que');
         this.appendStatementInput('block');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -1371,8 +1371,8 @@ let pbBlocks = {
       init: function () {
         this.setColour(Blockly.Blocks.control.COLOUR);
         this.appendValueInput('condition')
-          .setCheck('Boolean')
-          .appendField('Si');
+            .setCheck('Boolean')
+            .appendField('Si');
         this.setInputsInline(true);
         this.appendStatementInput('block');
         this.setPreviousStatement(true);
@@ -1388,12 +1388,12 @@ let pbBlocks = {
       init: function () {
         this.setColour(Blockly.Blocks.control.COLOUR);
         this.appendValueInput('condition')
-          .setCheck('Boolean')
-          .appendField('Si');
+            .setCheck('Boolean')
+            .appendField('Si');
         this.appendStatementInput('block1');
         this.setInputsInline(true);
         this.appendDummyInput()
-          .appendField('si no');
+            .appendField('si no');
         this.appendStatementInput('block2');
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -1414,7 +1414,7 @@ let pbBlocks = {
     };
 
     Blockly.Blocks.procedures_callnoreturn.onchange = function () {
-      requiredAllInputs(this) // Input fields are added after instantiation 
+      requiredAllInputs(this) // Input fields are added after instantiation
     };
 
     function isInsideProcedureDef(paramBlock) {
@@ -1477,12 +1477,12 @@ let pbBlocks = {
           var procedureDef = this.workspace.getBlockById(this.$parent)
           var ok = isInsideProcedureDef(this) && hasParam(procedureDef, this)
           this.setDisabled(!ok)
-          var warning = 
-            (ok || isFlying(this) || !procedureDef) 
-            ? null 
-            : (hasParam(procedureDef, this)) 
-              ? `Este bloque no puede usarse aquí. Es un parámetro que sólo puede usarse en ${getName(procedureDef)}.`
-              : "Este bloque ya no puede usarse, el parámetro ha sido eliminado."
+          var warning =
+              (ok || isFlying(this) || !procedureDef)
+                  ? null
+                  : (hasParam(procedureDef, this))
+                  ? `Este bloque no puede usarse aquí. Es un parámetro que sólo puede usarse en ${getName(procedureDef)}.`
+                  : "Este bloque ya no puede usarse, el parámetro ha sido eliminado."
           this.setWarningText(warning)
         }
       }
@@ -1521,24 +1521,24 @@ let pbBlocks = {
 
     Blockly.MyLanguage.RepetirVacio = function (block) {
       var repeats = Blockly.MyLanguage.valueToCode(block, 'count',
-        Blockly.MyLanguage.ORDER_ASSIGNMENT) || '0';
+          Blockly.MyLanguage.ORDER_ASSIGNMENT) || '0';
 
       var branch = Blockly.MyLanguage.statementToCode(block, 'block');
       branch = Blockly.MyLanguage.addLoopTrap(branch, block.id);
       var code = '';
 
       var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
-        'count', Blockly.Variables.NAME_TYPE);
+          'count', Blockly.Variables.NAME_TYPE);
       var endVar = repeats;
       if (!repeats.match(/^\w+$/) && !Blockly.isNumber(repeats)) {
         endVar = Blockly.MyLanguage.variableDB_.getDistinctName(
-          'repeat_end', Blockly.Variables.NAME_TYPE);
+            'repeat_end', Blockly.Variables.NAME_TYPE);
         code += 'var ' + endVar + ' = ' + repeats + ';\n';
       }
       code += 'for (var ' + loopVar + ' = 0; ' +
-        loopVar + ' < ' + endVar + '; ' +
-        loopVar + '++) {\n' +
-        branch + '}\n';
+          loopVar + ' < ' + endVar + '; ' +
+          loopVar + '++) {\n' +
+          branch + '}\n';
       return code;
     };
 
@@ -1578,41 +1578,41 @@ let pbBlocks = {
 
   _definirOperaciones() { //Este código fue sacado de Blockly
     this.blockBuilder.createCustomBlock('OpAritmetica', {
-      "type": "math_arithmetic",
-      "message0": "%1 %2 %3",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "A",
-          "check": "Number"
+          "type": "math_arithmetic",
+          "message0": "%1 %2 %3",
+          "args0": [
+            {
+              "type": "input_value",
+              "name": "A",
+              "check": "Number"
+            },
+            {
+              "type": "field_dropdown",
+              "name": "OP",
+              "options": [
+                ["%{BKY_MATH_ADDITION_SYMBOL}", "ADD"],
+                ["%{BKY_MATH_SUBTRACTION_SYMBOL}", "MINUS"],
+                ["%{BKY_MATH_MULTIPLICATION_SYMBOL}", "MULTIPLY"],
+                ["%{BKY_MATH_DIVISION_SYMBOL}", "DIVIDE"],
+                ["%{BKY_MATH_POWER_SYMBOL}", "POWER"]
+              ]
+            },
+            {
+              "type": "input_value",
+              "name": "B",
+              "check": "Number"
+            }
+          ],
+          "inputsInline": true,
+          "output": "Number",
+          "colour": "%{BKY_MATH_HUE}",
+          "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
+          "extensions": ["math_op_tooltip"]
         },
-        {
-          "type": "field_dropdown",
-          "name": "OP",
-          "options": [
-            ["%{BKY_MATH_ADDITION_SYMBOL}", "ADD"],
-            ["%{BKY_MATH_SUBTRACTION_SYMBOL}", "MINUS"],
-            ["%{BKY_MATH_MULTIPLICATION_SYMBOL}", "MULTIPLY"],
-            ["%{BKY_MATH_DIVISION_SYMBOL}", "DIVIDE"],
-            ["%{BKY_MATH_POWER_SYMBOL}", "POWER"]
-          ]
-        },
-        {
-          "type": "input_value",
-          "name": "B",
-          "check": "Number"
+        function() {
+          requiredAllInputs(this)
+          requiredAllInputs(this)
         }
-      ],
-      "inputsInline": true,
-      "output": "Number",
-      "colour": "%{BKY_MATH_HUE}",
-      "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
-      "extensions": ["math_op_tooltip"]
-    },
-      function() { 
-        requiredAllInputs(this)
-        requiredAllInputs(this)
-      } 
     );
 
     Blockly.MyLanguage.OpAritmetica = function (block) {
@@ -1652,42 +1652,42 @@ let pbBlocks = {
     Blockly.Blocks.OpAritmetica.categoria = 'Operadores';
 
     this.blockBuilder.createCustomBlock('OpComparacion', {
-      "type": "logic_compare",
-      "message0": "%1 %2 %3",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "A"
+          "type": "logic_compare",
+          "message0": "%1 %2 %3",
+          "args0": [
+            {
+              "type": "input_value",
+              "name": "A"
+            },
+            {
+              "type": "field_dropdown",
+              "name": "OP",
+              "options": [
+                ["=", "EQ"],
+                ["\u2260", "NEQ"],
+                ["\u200F<", "LT"],
+                ["\u200F\u2264", "LTE"],
+                ["\u200F>", "GT"],
+                ["\u200F\u2265", "GTE"]
+              ]
+            },
+            {
+              "type": "input_value",
+              "name": "B"
+            }
+          ],
+          "inputsInline": true,
+          "output": "Boolean",
+          "style": "logic_blocks",
+          "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}",
+          "extensions": ["logic_compare", "logic_op_tooltip"]
         },
-        {
-          "type": "field_dropdown",
-          "name": "OP",
-          "options": [
-            ["=", "EQ"],
-            ["\u2260", "NEQ"],
-            ["\u200F<", "LT"],
-            ["\u200F\u2264", "LTE"],
-            ["\u200F>", "GT"],
-            ["\u200F\u2265", "GTE"]
-          ]
-        },
-        {
-          "type": "input_value",
-          "name": "B"
+        function() {
+          requiredAllInputs(this)
+          requiredAllInputs(this)
         }
-      ],
-      "inputsInline": true,
-      "output": "Boolean",
-      "style": "logic_blocks",
-      "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}",
-      "extensions": ["logic_compare", "logic_op_tooltip"]
-    },
-      function() { 
-        requiredAllInputs(this)
-        requiredAllInputs(this)
-      } 
     );
-    
+
     Blockly.MyLanguage.OpComparacion = function(block) {
       // Comparison operator.
       var OPERATORS = {
@@ -1705,7 +1705,7 @@ let pbBlocks = {
       var argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
       var code = argument0 + ' ' + operator + ' ' + argument1;
       return [code, order];
-    };    
+    };
 
     Blockly.Blocks.OpComparacion.categoria = 'Operadores';
   },
