@@ -2,7 +2,7 @@
   "name": "pilas-bloques-blocks",
   "version": "0.0.7",
   "description": "Block gallery used for Pilas Bloques challenges",
-  "main": "pilas-bloques-blocks.js",
+  "main": "index.js",
   "scripts": {
     "start": "cd docs && npm install && http-server",
     "updatedemo": "cd docs && npm install pilas-bloques-blocks@latest --save && git add . && git commit -m \"updated demo\" && git push",
