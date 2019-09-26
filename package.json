@@ -1,6 +1,6 @@
 {
   "name": "pilas-bloques-blocks",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Block gallery used for Pilas Bloques challenges",
   "main": "index.js",
   "scripts": {
