@@ -1678,12 +1678,11 @@ let pbBlocks = {
           ],
           "inputsInline": true,
           "output": "Boolean",
-          "style": "logic_blocks",
           "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}",
           "extensions": ["logic_compare", "logic_op_tooltip"]
         },
         function() {
-          requiredAllInputs(this)
+          requiredAllInputs(this);
           requiredAllInputs(this)
         }
     );
